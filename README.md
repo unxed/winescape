@@ -100,3 +100,8 @@ func ReadDirectory(path string) ([]FileItem, error) {
   make probe
   wine probe/wine_syscall_probe.exe
   ```
+
+## Similar projects
+
+* [WinUnixPtyBridge](https://gitlab.howett.net/DHowett/WinUnixPtyBridge)
+
