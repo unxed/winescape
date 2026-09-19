@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
+          cache: false
       - name: Vet
         run: go vet ./...
       - name: Test
@@ -43,30 +44,32 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
+          cache: false
       - name: Install Wine
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq --no-install-recommends wine64
-          wine64 --version || wine --version
+          # On Ubuntu the 64-bit loader lives under /usr/lib/wine and is not on PATH.
+          W=$(command -v wine || command -v wine64 || echo /usr/lib/wine/wine64)
+          echo "WINE=$W" >> "$GITHUB_ENV"
+          "$W" --version
       - name: Build the runner for Windows
         run: |
           mkdir -p build
           GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -o build/test_runner.exe ./cmd/test-runner
       - name: Initialise the Wine prefix
         run: |
-          (wine64 wineboot --init || wine wineboot --init) || true
+          "$WINE" wineboot --init || true
           sleep 5
       - name: Run the end-to-end suite
         run: |
-          W=$(command -v wine64 || command -v wine)
-          $W build/test_runner.exe 2>&1 | tee build/runner.log
+          "$WINE" build/test_runner.exe 2>&1 | tee build/runner.log
           test "${PIPESTATUS[0]}" -eq 0
       - name: Package tests under Wine
         # Informational: these were never run in CI before.
         continue-on-error: true
         run: |
-          W=$(command -v wine64 || command -v wine)
-          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go test -exec "$W" ./go/... 2>&1 | tee build/gotest.log
+          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go test -exec "$WINE" ./go/... 2>&1 | tee build/gotest.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:

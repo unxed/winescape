@@ -2,13 +2,10 @@ package main
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
-	"strconv"
-	"strings"
 	"time"
 
 	winescape "github.com/unxed/libwinescape/go"
