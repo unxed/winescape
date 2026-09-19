@@ -57,3 +57,26 @@ func main() {
 	fmt.Printf("Read %d bytes: %s\n", n, string(buf[:n]))
 }
 ```
+
+## Spawning a process (`Spawn`, `StartPTY`)
+
+`Spawn` forks the Wine process. Only the forking thread exists in the child; every
+other thread, and every lock one of them held, is a frozen copy. Two rules follow,
+and the implementation keeps both (`go/spawn.go`):
+
+1. **The child runs raw syscalls only**, from `nosplit` code, on data laid out
+   before the fork: no allocation, no stack growth, no Go runtime and no Wine call.
+   It rebuilds the descriptor table, closes the rest, calls `setsid`, sets the
+   controlling terminal, changes directory, gives every signal its default action
+   back (Wine ignores `SIGPIPE`, and an ignored signal survives `execve`), clears the
+   signal mask and execs. If any step fails it reports the step and errno over a
+   close-on-exec pipe and exits; the parent turns that into a `SpawnError`.
+2. **Signals are blocked across the fork**, on a goroutine pinned to its thread
+   (`runtime.LockOSThread`), so no handler runs in the child before it has exec'd.
+
+`fork` is `clone(SIGCHLD)` because arm64 has no `fork`. A `Spawn` call costs a copy of
+the address space's page tables; it is meant for starting a shell, not for a hot loop.
+
+Reading a pseudo-terminal master is a blocking raw read like any other. Either call it
+on a `gort` worker, or `Poll` with a short timeout first so the thread is not held while
+the child is quiet. `Wait4` with `WNOHANG` is the non-blocking way to reap.

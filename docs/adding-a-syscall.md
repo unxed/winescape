@@ -15,9 +15,10 @@ To add a new syscall:
 3. **Regenerate Tables:**
    Run:
    ```bash
-   go run ./cmd/gen-numbers .
-   # or: make gen
+   make gen   # go run ./cmd/gen-numbers . && gofmt -w go/numbers_*.go
    ```
+   The generator does not align the const blocks; the committed files are gofmt-ed,
+   and CI regenerates them and fails on any difference.
    This updates:
    - `go/numbers_linux_amd64.go`
    - `go/numbers_linux_arm64.go`

@@ -28,6 +28,8 @@ jobs:
       - name: Generated files match the syscall table
         run: |
           go run ./cmd/gen-numbers .
+          # The generator does not align the const blocks; the committed files are gofmt-ed.
+          gofmt -w go/numbers_*.go
           git status --short
           git diff --exit-code
 

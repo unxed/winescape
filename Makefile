@@ -7,6 +7,7 @@ test:
 
 gen:
 	go run ./cmd/gen-numbers .
+	gofmt -w go/numbers_*.go
 
 probe:
 	GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -o probe/wine_syscall_probe.exe ./probe

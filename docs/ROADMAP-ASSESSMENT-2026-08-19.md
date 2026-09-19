@@ -40,6 +40,9 @@ IPC & Host Integration" sections already exists:
   scope question — deferred to whoever wires the first real embedded-terminal
   call site, since the right shape will be clearer from actual usage than
   from writing it speculatively now.
+  **Update:** that call site is `f4`'s built-in terminal under Wine, and the
+  helper now exists as `Spawn`/`StartPTY`. It needed a fork, which the pieces
+  listed here could not provide; see `docs/threading.md`.
 
 ## Disposition
 

@@ -60,7 +60,8 @@ including a response to external critique of this approach in
 - **Pipes & Memory Mapping:** `Pipe2`, `Dup3`, `Mmap`, `Munmap`.
 - **Real-Time Linux File Watching:** `InotifyInit1`, `InotifyAddWatch`, `InotifyRmWatch`, `ParseInotifyEvents`.
 - **POSIX Host Identity:** `Getuid`, `Getgid`, `Geteuid`, `Getegid`, `Getppid`.
-- **Process Signals & Control:** `Kill`, `Wait4`, `Execve`.
+- **Process Signals & Control:** `Kill`, `Wait4`, `Execve`, `WaitStatus`.
+- **Spawning a host process and a pseudo-terminal for it (Linux hosts):** `Spawn` (fork, descriptor table, `setsid`, controlling terminal, signal reset, `execve`, failure reported back as `SpawnError`), `StartPTY` (forkpty in one call), `OpenPTY`, `SetWinsize`, `Tcgetpgrp`, `Poll`. See `docs/threading.md` for the fork rules and for reading a master without holding a `P`.
 - **Terminal Control & Clocks:** `Ioctl`, `GetWinsize` (`TIOCGWINSZ`), `Tcgetattr`, `Tcsetattr`, `MakeRaw`, `ClockGettime`, `ClockNanosleep`, `Sleep` (with automatic signal restart on `EINTR`).
 - **Raw POSIX Networking & IPC:** `Socket`, `Bind`, `Connect`, `Listen`, `Accept4`, `DialUnix`, `ListenUnix` (connect directly to host X11, Wayland, D-Bus, Docker, ssh-agent sockets).
 - **Go Scheduler Isolation (`gort`):** Dedicated `LockOSThread` worker pool (`gort.NewPool()`, `gort.RunInPool()`).
