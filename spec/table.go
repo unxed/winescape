@@ -511,4 +511,67 @@ var SyscallTable = []SyscallEntry{
 			OSFreeBSD: {ArchAMD64: 59, ArchARM64: 59},
 		},
 	},
+	{
+		Name: "clone",
+		Args: 5,
+		Numbers: map[TargetOS]map[TargetArch]uint64{
+			OSLinux: {ArchAMD64: 56, ArchARM64: 220, ArchRISCV64: 220},
+		},
+	},
+	{
+		Name: "setsid",
+		Args: 0,
+		Numbers: map[TargetOS]map[TargetArch]uint64{
+			OSLinux: {ArchAMD64: 112, ArchARM64: 157, ArchRISCV64: 157},
+		},
+	},
+	{
+		Name: "chdir",
+		Args: 1,
+		Numbers: map[TargetOS]map[TargetArch]uint64{
+			OSLinux: {ArchAMD64: 80, ArchARM64: 49, ArchRISCV64: 49},
+		},
+	},
+	{
+		Name: "exit_group",
+		Args: 1,
+		Numbers: map[TargetOS]map[TargetArch]uint64{
+			OSLinux: {ArchAMD64: 231, ArchARM64: 94, ArchRISCV64: 94},
+		},
+	},
+	{
+		Name: "rt_sigprocmask",
+		Args: 4,
+		Numbers: map[TargetOS]map[TargetArch]uint64{
+			OSLinux: {ArchAMD64: 14, ArchARM64: 135, ArchRISCV64: 135},
+		},
+	},
+	{
+		Name: "rt_sigaction",
+		Args: 4,
+		Numbers: map[TargetOS]map[TargetArch]uint64{
+			OSLinux: {ArchAMD64: 13, ArchARM64: 134, ArchRISCV64: 134},
+		},
+	},
+	{
+		Name: "ppoll",
+		Args: 5,
+		Numbers: map[TargetOS]map[TargetArch]uint64{
+			OSLinux: {ArchAMD64: 271, ArchARM64: 73, ArchRISCV64: 73},
+		},
+	},
+	{
+		Name: "close_range",
+		Args: 3,
+		Numbers: map[TargetOS]map[TargetArch]uint64{
+			OSLinux: {ArchAMD64: 436, ArchARM64: 436, ArchRISCV64: 436},
+		},
+	},
+	{
+		Name: "fcntl",
+		Args: 3,
+		Numbers: map[TargetOS]map[TargetArch]uint64{
+			OSLinux: {ArchAMD64: 72, ArchARM64: 25, ArchRISCV64: 25},
+		},
+	},
 }

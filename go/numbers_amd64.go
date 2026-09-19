@@ -65,4 +65,13 @@ const (
 	sysStatfs          uintptr = 137
 	sysFstatfs         uintptr = 138
 	sysExecve          uintptr = 59
+	sysClone           uintptr = 56
+	sysSetsid          uintptr = 112
+	sysChdir           uintptr = 80
+	sysExitGroup       uintptr = 231
+	sysRtSigprocmask   uintptr = 14
+	sysRtSigaction     uintptr = 13
+	sysPpoll           uintptr = 271
+	sysCloseRange      uintptr = 436
+	sysFcntl           uintptr = 72
 )

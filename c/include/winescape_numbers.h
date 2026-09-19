@@ -61,6 +61,15 @@
 #define WS_SYS_STATFS 137
 #define WS_SYS_FSTATFS 138
 #define WS_SYS_EXECVE 59
+#define WS_SYS_CLONE 56
+#define WS_SYS_SETSID 112
+#define WS_SYS_CHDIR 80
+#define WS_SYS_EXIT_GROUP 231
+#define WS_SYS_RT_SIGPROCMASK 14
+#define WS_SYS_RT_SIGACTION 13
+#define WS_SYS_PPOLL 271
+#define WS_SYS_CLOSE_RANGE 436
+#define WS_SYS_FCNTL 72
 #elif defined(__linux__) && (defined(__aarch64__) || defined(_M_ARM64))
 #define WS_SYS_READ 63
 #define WS_SYS_WRITE 64
@@ -112,6 +121,15 @@
 #define WS_SYS_STATFS 43
 #define WS_SYS_FSTATFS 44
 #define WS_SYS_EXECVE 221
+#define WS_SYS_CLONE 220
+#define WS_SYS_SETSID 157
+#define WS_SYS_CHDIR 49
+#define WS_SYS_EXIT_GROUP 94
+#define WS_SYS_RT_SIGPROCMASK 135
+#define WS_SYS_RT_SIGACTION 134
+#define WS_SYS_PPOLL 73
+#define WS_SYS_CLOSE_RANGE 436
+#define WS_SYS_FCNTL 25
 #elif defined(__FreeBSD__) && (defined(__x86_64__) || defined(_M_X64))
 #define WS_SYS_READ 3
 #define WS_SYS_WRITE 4
