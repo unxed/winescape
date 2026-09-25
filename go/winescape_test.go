@@ -70,6 +70,7 @@ func TestRetryEINTR_PassesThroughOtherErrors(t *testing.T) {
 }
 
 func TestSyscallConstants_NonZero(t *testing.T) {
+	skipWithoutSyscallTable(t)
 	if sysWrite != 1 && sysWrite != 4 && sysWrite != 64 {
 		t.Errorf("sysWrite number %d is not matching known platforms", sysWrite)
 	}
